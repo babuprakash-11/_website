@@ -5,8 +5,7 @@ const skills = [
   { name: "JavaScript / TypeScript", level: 72 },
   { name: "React.js", level: 68 },
   { name: "Biology / Bioinformatics", level: 82 },
-  { name: "Database (SQL/NoSQL)", level: 65 },
-  { name: "Machine Learning", level: 55 },
+  { name: "Database (SQL/RDBMS)", level: 65 },
 ];
 
 const timeline = [
@@ -19,7 +18,7 @@ const timeline = [
     color: "hsl(220,90%,60%)",
   },
   {
-    year: "2023",
+    year: "2025",
     title: "Discovered Bioinformatics",
     place: "Self-taught & Online Courses",
     desc: "Combined my passion for biology with programming skills to explore computational biology and genomics.",
@@ -27,18 +26,10 @@ const timeline = [
     color: "hsl(150,70%,50%)",
   },
   {
-    year: "2024",
-    title: "First Solo Travel",
-    place: "Coorg, Karnataka",
-    desc: "Embarked on my first solo travel adventure, discovering the joy of independent exploration.",
-    icon: MapPin,
-    color: "hsl(270,80%,65%)",
-  },
-  {
-    year: "2025",
-    title: "Built First Full-Stack App",
+    year: "2026",
+    title: "Built First Full-Stack Website",
     place: "Personal Project",
-    desc: "Created my first complete web application combining React frontend with Node.js backend.",
+    desc: "Created my first complete website combining React frontend with Node.js backend — this very portfolio!",
     icon: Code,
     color: "hsl(40,90%,55%)",
   },
@@ -144,7 +135,7 @@ export default function About() {
           <div className="space-y-3">
             {[
               { icon: Heart, label: "Interests", value: "Biology, Bioinformatics, AI in Medicine" },
-              { icon: Code, label: "Currently Learning", value: "Rust, Machine Learning, CRISPR Tech" },
+              { icon: Code, label: "Currently Learning", value: "Python, Data Structures, RDBMS" },
               { icon: Globe, label: "Goal", value: "Study abroad for MSc in Bioinformatics" },
               { icon: MapPin, label: "Dream Destination", value: "Europe (for studies & travel)" },
             ].map((item) => (
@@ -197,7 +188,7 @@ export default function About() {
 
             {timeline.map((item, i) => (
               <div
-                key={item.year}
+                key={`${item.year}-${item.title}`}
                 className={`relative flex items-start mb-10 ${
                   i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
