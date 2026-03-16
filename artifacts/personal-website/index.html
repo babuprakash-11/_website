@@ -11,6 +11,44 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="msg-container">
+      <input type="text" id="msg" placeholder="Enter your message" />
+      <button onclick="sendMessage()">Send Message</button>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      async function sendMessage(){
+        const text = document.getElementById("msg").value;
+        
+        // Validate input
+        if (!text.trim()) {
+          console.warn("Message cannot be empty");
+          return;
+        }
+
+        try {
+          const response = await fetch("/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text })
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Message sent successfully:", data);
+          
+          // Clear the input field
+          document.getElementById("msg").value = "";
+          
+        } catch (error) {
+          console.error("Error sending message:", error);
+          // Show error to user
+          alert("Failed to send message. Please try again.");
+        }
+      }
+    </script>
   </body>
 </html>
