@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Appireddy Babu Prakash Reddy - Personal Website"
+version = "1.0.0"
+id = "artifacts/personal-website"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 19147
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/personal-website run dev"
+
+[services.env]
+PORT = "19147"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/personal-website", "run", "build"]
+publicDir = "artifacts/personal-website/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
