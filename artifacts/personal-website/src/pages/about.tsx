@@ -11,10 +11,10 @@ const skills = [
 
 const timeline = [
   {
-    year: "2022",
+    year: "2025",
     title: "Started BCA",
-    place: "Bachelor of Computer Applications",
-    desc: "Began my journey in computer science, learning programming fundamentals and software development.",
+    place: "Kristu Jayanti University, Bangalore",
+    desc: "Began my journey in computer science at Kristu Jayanti University, learning programming fundamentals and software development.",
     icon: GraduationCap,
     color: "hsl(220,90%,60%)",
   },

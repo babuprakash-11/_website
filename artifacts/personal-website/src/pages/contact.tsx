@@ -63,8 +63,8 @@ export default function Contact() {
                 {
                   icon: Mail,
                   label: "Email",
-                  value: "abprakashreddy@gmail.com",
-                  href: "mailto:abprakashreddy@gmail.com",
+                  value: "babuprakash514781@gmail.com",
+                  href: "mailto:babuprakash514781@gmail.com",
                 },
                 {
                   icon: MapPin,
