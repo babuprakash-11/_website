@@ -1,29 +1,34 @@
-const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
-app.use(express.json());
-app.use(express.static("public"));
+const PORT = process.env.PORT || 3000;
 
-const db = new sqlite3.Database("messages.db");
+// Middleware
+app.use(bodyParser.json());
 
-db.run(`CREATE TABLE IF NOT EXISTS messages(
- id INTEGER PRIMARY KEY AUTOINCREMENT,
- text TEXT
-)`);
+// Database Connection
+mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log('MongoDB connection error:', err));
 
-app.post("/send",(req,res)=>{
-  const msg = req.body.message;
-  db.run("INSERT INTO messages(text) VALUES(?)",[msg]);
-  res.json({status:"saved"});
+// API Routes
+app.get('/api/data', (req, res) => {
+    res.json({ message: 'Hello from API' });
 });
 
-app.get("/messages",(req,res)=>{
-  db.all("SELECT * FROM messages",(err,rows)=>{
-    res.json(rows);
-  });
+app.post('/api/data', (req, res) => {
+    // Handle the posted data here
+    res.json({ message: 'Data received', data: req.body });
 });
 
-app.listen(3000,()=>{
- console.log("Server running on port 3000");
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
